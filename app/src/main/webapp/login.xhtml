@@ -3,11 +3,11 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 
 <h:head>
-    <h:outputStylesheet name="main.css" library="css" />
+    <h:outputStylesheet name="main.css" library="css"/>
 </h:head>
 
 <h:body>
@@ -15,11 +15,17 @@
     <div id="page">
 
         <h:form>
-            <h:inputText value="#{loginRequest.username}"/>
+            <h:inputText id="username" value="#{loginRequest.username}">
+                <f:validateLength minimum="3" maximum="15"/>
+                <!-- https://regex101.com/ -->
+                <f:validateRegex pattern="^[a-z]+$"/>
+            </h:inputText>
+            <h:message for="username"/>
             <h:inputSecret value="#{loginRequest.password}"/>
             <h:commandButton value="Login" action="#{loginController.login}"/>
         </h:form>
 
+        <h:outputText value="#{msg['jaz.app.name']}"/>
     </div>
 
 </h:body>
