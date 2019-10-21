@@ -18,7 +18,7 @@
             <h:inputText id="username" value="#{loginRequest.username}">
                 <f:validateLength minimum="3" maximum="15"/>
                 <!-- https://regex101.com/ -->
-                <f:validateRegex pattern="^[a-z]+$"/>
+<!--                <f:validateRegex pattern="^[a-z]+$"/>-->
             </h:inputText>
             <h:message for="username"/>
             <h:inputSecret value="#{loginRequest.password}"/>
