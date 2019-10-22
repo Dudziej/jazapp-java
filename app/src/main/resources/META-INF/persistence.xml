@@ -12,7 +12,6 @@
             <property name="hibernate.show_sql" value="true" />
 <!--            <property name="hibernate.format_sql" value="true" />-->
 
-<!--            <property name="hibernate.hbm2ddl.auto" value="validate" />-->
             <property name="hibernate.connection.provider_class"
                       value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
             <property name="hibernate.hikari.driverClassName" value="org.postgresql.Driver"/>

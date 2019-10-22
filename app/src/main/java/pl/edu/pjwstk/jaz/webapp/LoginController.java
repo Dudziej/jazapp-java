@@ -19,6 +19,6 @@ public class LoginController {
     public void login() {
         System.out.println("Tried to log in using " + loginRequest.toString());
 
-        profileRepository.doSth();
+        profileRepository.sampleCodeWithPC();
     }
 }
