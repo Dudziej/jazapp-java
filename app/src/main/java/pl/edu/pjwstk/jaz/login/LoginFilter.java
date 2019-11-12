@@ -7,22 +7,17 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter("*")
 public class LoginFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if (isRequestAllowed(req)) {
+        if (isResourceReq(req) || isSiteAllowed(req) || isUserLogged(req)) {
             chain.doFilter(req, res);
         } else {
             res.sendRedirect(getServletContext().getContextPath() + "/login.xhtml");
         }
-    }
-
-    private boolean isRequestAllowed(HttpServletRequest req) {
-        return isResourceReq(req) || isSiteAllowed(req) || isUserLogged(req);
     }
 
     private boolean isUserLogged(HttpServletRequest req) {

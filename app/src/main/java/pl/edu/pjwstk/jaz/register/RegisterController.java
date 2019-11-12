@@ -3,6 +3,7 @@ package pl.edu.pjwstk.jaz.register;
 import pl.edu.pjwstk.jaz.auth.ProfileService;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,7 +18,8 @@ public class RegisterController {
 
     public String register() {
         if (profileService.doesUserExist(registerRequest.getUsername())) {
-
+            FacesContext.getCurrentInstance().getExternalContext().getFlash()
+                    .put("error-message", "User already exist.");
             return "register.xhtml?faces-redirect=true";
         }
 

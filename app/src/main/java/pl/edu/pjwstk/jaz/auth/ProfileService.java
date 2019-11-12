@@ -47,4 +47,11 @@ public class ProfileService {
         var user = new User("Admin", "Admin","admin", "admin");
         profileRepository.addUser(user);
     }
+
+    public void logout() {
+        var session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+    }
 }

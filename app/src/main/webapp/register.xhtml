@@ -3,21 +3,18 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
 >
 <h:body>
 
     <ui:composition template="templates/base.xhtml">
-        <ui:param name="title" value="Main"/>
+        <ui:param name="title" value="Login"/>
 
         <ui:define name="content">
-            <h2>Witaj <h:outputText value="#{userContext.fullName}"/> w <h:outputText value="#{msg['jaz.app.name']}"/>!
-            </h2>
-
-            <h:form>
-                <h:commandButton styleClass="btn btn-primary" value="Logout" action="#{logoutController.logout}"/>
-            </h:form>
+            <h1>// TODO</h1>
         </ui:define>
+
     </ui:composition>
 
 </h:body>
