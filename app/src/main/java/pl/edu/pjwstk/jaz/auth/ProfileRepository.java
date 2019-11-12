@@ -6,11 +6,16 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @ApplicationScoped
 public class ProfileRepository {
     @PersistenceContext
     private EntityManager em;
+
+    private final Map<String, User> userMap = new HashMap<>();
 
     // startTx()
     @Transactional
@@ -36,4 +41,26 @@ public class ProfileRepository {
         System.out.println();
     }
     // commitTx()
+
+    User requireUser(String username) {
+        if (!userMap.containsKey(username)) {
+            throw new IllegalStateException("Required user does not exist.");
+        }
+        return userMap.get(username);
+    }
+
+    Optional<User> findUserByUsername(String username) {
+        if (userMap.containsKey(username)) {
+            return Optional.of(userMap.get(username));
+        }
+        return Optional.empty();
+    }
+
+    void addUser(User user) {
+        if (userMap.containsKey(user.getUsername())) {
+            throw new IllegalStateException(String.format("User %s already exists.", user.getUsername()));
+        }
+
+        userMap.put(user.getUsername(), user);
+    }
 }

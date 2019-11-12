@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
->
-
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xml:lang="en" lang="en">
 <h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Login</title>
+    <h:outputStylesheet name="bootstrap.css" library="css"/>
     <h:outputStylesheet name="main.css" library="css"/>
 </h:head>
 
 <h:body>
+    <div class="text-center">
+        <h:outputLabel rendered="#{flash.containsKey('error-message')}"
+                       styleClass="alert alert-danger" value="#{flash['error-message']}"/>
+        <h:form styleClass="form-signin">
+            <div class="form-group">
+                <h:inputText id="username" styleClass="form-control" a:placeholder="Username" value="#{loginRequest.username}"/>
+            </div>
 
-    <div id="page">
-
-        <h:form>
-            <h:inputText id="username" value="#{loginRequest.username}">
-                <f:validateLength minimum="3" maximum="15"/>
-                <!-- https://regex101.com/ -->
-<!--                <f:validateRegex pattern="^[a-z]+$"/>-->
-            </h:inputText>
-            <h:message for="username"/>
-            <h:inputSecret value="#{loginRequest.password}"/>
-            <h:commandButton value="Login" action="#{loginController.login}"/>
+            <div class="form-group">
+                <h:inputSecret id="password" styleClass="form-control" a:placeholder="Password" value="#{loginRequest.password}"/>
+            </div>
+            <h:commandButton styleClass="btn btn-primary" value="Login" action="#{loginController.login}"/>
+            <a>Signup</a>
         </h:form>
-
-        <h:outputText value="#{msg['jaz.app.name']}"/>
     </div>
-
 </h:body>
 </html>
