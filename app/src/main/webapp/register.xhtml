@@ -4,15 +4,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
 >
 <h:body>
 
     <ui:composition template="templates/base.xhtml">
-        <ui:param name="title" value="Login"/>
+        <ui:param name="title" value="Register"/>
 
         <ui:define name="content">
-            <h1>// TODO</h1>
+            <div class="text-center">
+
+                <h:form styleClass="form-base">
+                    <div class="form-group">
+                        <h:inputText id="firstName" styleClass="form-control" a:placeholder="First name"
+                                     value="#{registerRequest.firstName}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:inputText id="lastName" styleClass="form-control" a:placeholder="Last name"
+                                     value="#{registerRequest.lastName}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:inputText id="username" styleClass="form-control" a:placeholder="Username"
+                                     value="#{registerRequest.username}"/>
+                        <c:if test="#{flash.containsKey('already-exists')}">
+                            <small class="form-text text-danger"><h:outputText value="#{flash['already-exists']}"/></small>
+                        </c:if>
+                    </div>
+                    <div class="form-group">
+                        <h:inputSecret id="password" styleClass="form-control" a:placeholder="Password"
+                                     value="#{registerRequest.password}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:inputText id="email" styleClass="form-control" a:placeholder="Email"
+                                     value="#{registerRequest.email}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:inputText id="birthdate" styleClass="form-control" a:placeholder="Birthdate e.g. 01/05/1995"
+                                     value="#{registerRequest.birthDate}"/>
+                    </div>
+                    <h:commandButton styleClass="btn btn-primary" value="Register" action="#{registerController.register}"/>
+                </h:form>
+            </div>
         </ui:define>
 
     </ui:composition>

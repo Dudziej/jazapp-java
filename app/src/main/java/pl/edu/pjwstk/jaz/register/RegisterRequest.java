@@ -10,6 +10,8 @@ public class RegisterRequest {
     private String lastName;
     private String username;
     private String password;
+    private String email;
+    private String birthDate;
 
     public String getFirstName() {
         return firstName;
@@ -41,5 +43,21 @@ public class RegisterRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 }

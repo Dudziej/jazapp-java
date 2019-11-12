@@ -19,7 +19,7 @@ public class RegisterController {
     public String register() {
         if (profileService.doesUserExist(registerRequest.getUsername())) {
             FacesContext.getCurrentInstance().getExternalContext().getFlash()
-                    .put("error-message", "User already exist.");
+                    .put("already-exists", "Username already exists.");
             return "register.xhtml?faces-redirect=true";
         }
 
@@ -27,7 +27,9 @@ public class RegisterController {
                 registerRequest.getFirstName(),
                 registerRequest.getLastName(),
                 registerRequest.getUsername(),
-                registerRequest.getPassword()
+                registerRequest.getPassword(),
+                registerRequest.getEmail(),
+                registerRequest.getBirthDate()
         );
 
         return "login.xhtml?faces-redirect=true";
