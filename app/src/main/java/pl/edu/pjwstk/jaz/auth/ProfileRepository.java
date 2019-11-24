@@ -40,7 +40,7 @@ public class ProfileRepository {
 
         System.out.println();
     }
-    // commitTx()
+    // commitTx()Mem
 
     User requireUser(String username) {
         if (!userMap.containsKey(username)) {

@@ -38,4 +38,8 @@
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
 
+    <listener>
+        <listener-class>pl.edu.pjwstk.jaz.samples.ExamplesRunner</listener-class>
+    </listener>
+
 </web-app>

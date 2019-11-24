@@ -27,7 +27,8 @@ public class LoginFilter extends HttpFilter {
 
     private boolean isSiteAllowed(HttpServletRequest req) {
         return req.getRequestURI().equals(req.getContextPath() + "/login.xhtml") ||
-         req.getRequestURI().equals(req.getContextPath() + "/register.xhtml");
+                req.getRequestURI().equals(req.getContextPath() + "/register.xhtml") ||
+                req.getRequestURI().contains("samples");
     }
 
     private boolean isResourceReq(HttpServletRequest req) {
