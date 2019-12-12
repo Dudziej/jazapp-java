@@ -13,3 +13,10 @@ databaseChangeLog:
         relativeToChangelogFile: true
         splitStatements: false
         path: 20191124_jpa.sql
+  - changeSet:
+      id: 20191110_auction
+      author: Maciej Dudzik
+      sqlFile:
+        relativeToChangelogFile: true
+        splitStatements: false
+        path: 20191110_auction.sql

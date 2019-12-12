@@ -62,5 +62,6 @@ public class ProfileRepository {
         }
 
         userMap.put(user.getUsername(), user);
+        //em.persist(user);
     }
 }
