@@ -17,7 +17,7 @@
                     <ui:repeat value="#{listAuctionController.auctionList}" var="auction">
                         <h:link styleClass="list-group-item list-group-item-action" outcome="editauction">
                             <f:param name="auctionId" value="#{auction.id}"/>
-
+                            <h:graphicImage value="#{auction.photo}" height="64"/>
                             <h:outputText  value="##{auction.id} #{auction.name} - #{auction.price}"/>
                         </h:link>
                     </ui:repeat>
