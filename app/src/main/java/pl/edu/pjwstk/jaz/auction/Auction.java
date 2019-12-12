@@ -1,14 +1,8 @@
 package pl.edu.pjwstk.jaz.auction;
 
-import org.hibernate.annotations.Type;
-import org.w3c.dom.Text;
-
 import javax.persistence.*;
-import javax.servlet.jsp.tagext.TagExtraInfo;
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Set;
 
 @Entity
 public class Auction {
@@ -22,19 +16,22 @@ public class Auction {
     private String description;
     @Column(name = "photo")
     private String photo;
-    @Type(type = "org.postgresql.util.PGobject")
-    @Column(name = "parameters")
-    private Map<String,String> parameters;
+    @ManyToMany
+    @JoinTable(
+            name = "auction_param",
+            joinColumns = @JoinColumn(name = "auction_id"),
+            inverseJoinColumns = @JoinColumn(name = "parameter_id"))
+    private Set<ParamEntity> parameters;
     @Column(name = "price")
-    private BigDecimal price;
+    private BigDecimal price = new BigDecimal(1);
 
-    public Auction(Long id, String name, String description, String photo, Map<String, String> parameters, BigDecimal price) {
-        this.id=id;
+    public Auction(Long id, String name, String description, String photo, Set<ParamEntity> parameters, BigDecimal price) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.photo = photo;
         this.parameters = parameters;
-        this.price = price;
+        this.price = price == null ? new BigDecimal(1) : price;
     }
 
     public Auction() {
@@ -68,11 +65,11 @@ public class Auction {
         this.photo = photo;
     }
 
-    public Map<String, String> getParameters() {
+    public Set<ParamEntity> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    public void setParameters(Set<ParamEntity> parameters) {
         this.parameters = parameters;
     }
 
