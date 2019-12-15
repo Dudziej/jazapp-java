@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("hello")
+@WebServlet("/hello")
 public class AverageServlet extends HttpServlet {
 
     @Override

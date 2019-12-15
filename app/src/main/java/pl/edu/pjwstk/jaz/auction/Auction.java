@@ -1,5 +1,8 @@
 package pl.edu.pjwstk.jaz.auction;
 
+import pl.edu.pjwstk.jaz.auth.ProfileEntity;
+import pl.edu.pjwstk.jaz.auth.User;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -22,8 +25,17 @@ public class Auction {
             joinColumns = @JoinColumn(name = "auction_id"),
             inverseJoinColumns = @JoinColumn(name = "parameter_id"))
     private Set<ParamEntity> parameters;
+    @ManyToOne
+    @JoinTable(
+            name = "auction_category",
+            joinColumns = @JoinColumn(name = "auction_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private CategoryEntity category;
     @Column(name = "price")
     private BigDecimal price = new BigDecimal(1);
+    @ManyToOne
+    @JoinColumn(name="creator_id")
+    private User creator;
 
     public Auction(Long id, String name, String description, String photo, Set<ParamEntity> parameters, BigDecimal price) {
         this.id = id;
@@ -79,5 +91,21 @@ public class Auction {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public CategoryEntity getCategory() {
+        return category;
+    }
+
+    public void Category(CategoryEntity category) {
+        this.category = category;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 }

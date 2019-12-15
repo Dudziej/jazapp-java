@@ -12,7 +12,7 @@ public class UserContext {
     private HttpServletRequest request;
 
     @Inject
-    private ProfileRepository profileRepository;
+    private UserRepository userRepository;
 
     public String getUsername() {
         var session = request.getSession(false);
@@ -27,8 +27,14 @@ public class UserContext {
     public String getFullName() {
         var username = getUsername();
 
-        var user = profileRepository.requireUser(username);
+        var user = userRepository.getUserByUsername(username).get();
 
         return String.format("%s %s", user.getFirstName(), user.getLastName());
+    }
+
+    public boolean isAdmin(){
+        var username = getUsername();
+        var user = userRepository.getUserByUsername(username).get();
+        return user.isAdmin();
     }
 }

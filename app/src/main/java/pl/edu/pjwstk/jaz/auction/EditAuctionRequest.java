@@ -1,17 +1,17 @@
 package pl.edu.pjwstk.jaz.auction;
 
-import pl.edu.pjwstk.jaz.samples.jpa.Door;
-import pl.edu.pjwstk.jaz.samples.jpa.Location;
-
+import javax.swing.text.html.parser.Entity;
 import java.math.BigDecimal;
+import java.util.Set;
 
 public class EditAuctionRequest {
     private Long id;
     private String name;
     private String description;
     private String photo;
-    private String parameters;
+    private Set<ParamEntity> parameters;
     private BigDecimal price;
+    private CategoryEntity category;
 
     public EditAuctionRequest() {
     }
@@ -21,8 +21,9 @@ public class EditAuctionRequest {
         this.name = auction.getName();
         this.description = auction.getDescription();
         this.photo = auction.getPhoto();
-        //this.parameters = auction.getParameters();
+        this.parameters = auction.getParameters();
         this.price = auction.getPrice();
+        this.category = auction.getCategory();
     }
 
     public Long getId() {
@@ -57,11 +58,11 @@ public class EditAuctionRequest {
         this.photo = photo;
     }
 
-    public String getParameters() {
+    public Set<ParamEntity> getParameters() {
         return parameters;
     }
 
-    public void setParameters(String parameters) {
+    public void setParameters(Set<ParamEntity> parameters) {
         this.parameters = parameters;
     }
 
@@ -73,7 +74,14 @@ public class EditAuctionRequest {
         this.price = price;
     }
 
+    public CategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
+    }
     public Auction toAuction() {
-        return new Auction(id, name, description, photo, null, price);
+        return new Auction(id, name, description, photo, parameters, price);
     }
 }

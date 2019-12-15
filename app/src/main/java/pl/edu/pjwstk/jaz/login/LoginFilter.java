@@ -1,6 +1,9 @@
 package pl.edu.pjwstk.jaz.login;
 
+import pl.edu.pjwstk.jaz.auth.UserContext;
+
 import javax.faces.application.ResourceHandler;
+import javax.inject.Inject;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
@@ -11,10 +14,21 @@ import java.io.IOException;
 
 @WebFilter("*")
 public class LoginFilter extends HttpFilter {
+    @Inject
+    private UserContext uc;
+
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         if (isResourceReq(req) || isSiteAllowed(req) || isUserLogged(req)) {
-            chain.doFilter(req, res);
+            if (isAdminReq(req)) {
+                if (uc.isAdmin()) {
+                    chain.doFilter(req, res);
+                } else {
+                    res.sendRedirect(getServletContext().getContextPath() + "/index.xhtml");
+                }
+            } else {
+                chain.doFilter(req, res);
+            }
         } else {
             res.sendRedirect(getServletContext().getContextPath() + "/login.xhtml");
         }
@@ -34,5 +48,13 @@ public class LoginFilter extends HttpFilter {
     private boolean isResourceReq(HttpServletRequest req) {
         return req.getRequestURI().startsWith(
                 req.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");
+    }
+
+    private boolean isAdminReq(HttpServletRequest req) {
+        return req.getRequestURI().equals(req.getContextPath() + "/auctions/editauction.xhtml");
+    }
+
+    private boolean isOwnerReq(HttpServletRequest req){
+        return  req.getRequestURI().equals(req.getContextPath() + "/auctions/editauction.xhtml");
     }
 }

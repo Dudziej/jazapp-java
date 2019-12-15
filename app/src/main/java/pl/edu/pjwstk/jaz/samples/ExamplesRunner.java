@@ -13,6 +13,10 @@ public class ExamplesRunner implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        jpaExample.runExample();
+        try {
+            jpaExample.runExample();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 }

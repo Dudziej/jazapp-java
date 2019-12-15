@@ -38,6 +38,14 @@
                         <h:inputText id="price" styleClass="form-control" a:placeholder="Price"
                                      value="#{editAuctionController.editRequest.price}"/>
                     </div>
+                    <div class="form-group">
+                        <h:inputText id="parameter" styleClass="form-control" a:placeholder="Parameter"
+                                     value="#{editAuctionController.editRequest.parameters}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:inputText id="category" styleClass="form-control" a:placeholder="Category"
+                                     value="#{editAuctionController.editRequest.category}"/>
+                    </div>
 
 
                     <h:commandButton styleClass="btn btn-primary" value="Save" action="#{editAuctionController.save}"/><br/>

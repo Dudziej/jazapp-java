@@ -9,17 +9,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
 
 @ApplicationScoped
 public class ProfileService {
     @Inject
-    private ProfileRepository profileRepository;
-
+    private UserRepository userRepository;
     @Inject
     private HttpServletRequest request;
 
-    private final DateFormat dateFormat =  new SimpleDateFormat("dd/MM/yyyy");
+    private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     public boolean logIn(String username, String password) {
         if (isUsernameAndPasswordCorrect(username, password)) {
@@ -32,7 +30,7 @@ public class ProfileService {
     }
 
     private boolean isUsernameAndPasswordCorrect(String username, String password) {
-        var userOptional = profileRepository.findUserByUsername(username);
+        var userOptional = userRepository.getUserByUsername(username);
         if (userOptional.isEmpty()) {
             return false;
         }
@@ -42,12 +40,12 @@ public class ProfileService {
 
     public boolean doesUserExist(String username) {
         //noinspection SimplifyOptionalCallChains // just for learning
-        return !profileRepository.findUserByUsername(username).isEmpty();
+        return !userRepository.getUserByUsername(username).isEmpty();
     }
 
     public void addUser(String firstName, String lastName, String username, String password, String email, String birthday) {
         var user = new User(firstName, lastName, username, password, email, parseDate(birthday));
-        profileRepository.addUser(user);
+        userRepository.addUser(user);
     }
 
     private LocalDate parseDate(String dateAsText) {
@@ -64,9 +62,15 @@ public class ProfileService {
 
     @PostConstruct
     public void addTest() {
-        var user = new User("Admin", "Admin","admin", "admin",
-                "admin@admin.pl", LocalDate.parse("2007-12-03"));
-        profileRepository.addUser(user);
+        if (!userRepository.getUserByUsername("admin").isPresent()) {
+            var admin = new User("Admin", "Admin", "admin", "admin",
+                    "admin@admin.pl", LocalDate.parse("2007-12-03"));
+            admin.setAdmin(true);
+            userRepository.addUser(admin);
+            var user = new User("User", "Nonadmin", "user", "user",
+                    "admin@admin.pl", LocalDate.parse("2007-12-03"));
+            userRepository.addUser(user);
+        }
     }
 
     public void logout() {
