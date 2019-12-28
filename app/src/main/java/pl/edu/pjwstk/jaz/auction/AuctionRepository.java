@@ -19,10 +19,10 @@ public class AuctionRepository {
         return Optional.ofNullable(em.find(Auction.class, id));
     }
 
-    public Auction getAuctionByName(String name){
-        TypedQuery<Auction> q = em.createQuery("SELECT a FROM auction a WHERE a.name = :name", Auction.class);
+    public Optional<Auction> getAuctionByName(String name){
+        TypedQuery<Auction> q = em.createQuery("SELECT a FROM Auction a WHERE a.name = :name", Auction.class);
         q.setParameter("name", name);
-        return q.getSingleResult();
+        return Optional.ofNullable(q.getSingleResult());
     }
 
     public List<Auction> getAuctions(){

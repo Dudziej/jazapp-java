@@ -1,7 +1,6 @@
 package pl.edu.pjwstk.jaz.auction;
 
 import pl.edu.pjwstk.jaz.samples.ParamRetriever;
-import pl.edu.pjwstk.jaz.samples.jpa.DoorRepository;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
