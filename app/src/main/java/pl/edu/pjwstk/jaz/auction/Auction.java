@@ -4,6 +4,7 @@ import pl.edu.pjwstk.jaz.auth.ProfileEntity;
 import pl.edu.pjwstk.jaz.auth.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -19,19 +20,20 @@ public class Auction {
     private String description;
     @Column(name = "photo")
     private String photo;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "auction_param",
             joinColumns = @JoinColumn(name = "auction_id"),
             inverseJoinColumns = @JoinColumn(name = "parameter_id"))
     private Set<ParamEntity> parameters;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(
             name = "auction_category",
             joinColumns = @JoinColumn(name = "auction_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private CategoryEntity category;
     @Column(name = "price")
+    @DecimalMin(inclusive = true, value = "1")
     private BigDecimal price = new BigDecimal(1);
     @ManyToOne
     @JoinColumn(name="creator_id")

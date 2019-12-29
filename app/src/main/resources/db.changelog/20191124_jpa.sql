@@ -1,4 +1,4 @@
-CREATE TABLE card_holder
+/*CREATE TABLE card_holder
 (
     id         BIGINT  NOT NULL,
     first_name VARCHAR NOT NULL,
@@ -39,4 +39,4 @@ CREATE TABLE door
 CREATE TABLE already_run_sample
 (
     name VARCHAR NOT NULL PRIMARY KEY
-);
+);*/

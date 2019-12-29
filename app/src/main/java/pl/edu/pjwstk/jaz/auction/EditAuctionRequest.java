@@ -1,6 +1,7 @@
 package pl.edu.pjwstk.jaz.auction;
 
 import javax.swing.text.html.parser.Entity;
+import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -65,7 +66,7 @@ public class EditAuctionRequest {
     public void setParameters(Set<ParamEntity> parameters) {
         this.parameters = parameters;
     }
-
+    @DecimalMin(value = "0.0", inclusive = false)
     public BigDecimal getPrice() {
         return price;
     }

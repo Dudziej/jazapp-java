@@ -5,6 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsf/core"
 >
 <h:body>
 
@@ -16,28 +17,38 @@
                 <h:outputLabel rendered="#{flash.containsKey('error-message')}"
                                styleClass="alert alert-danger" value="#{flash['error-message']}"/>
                 <h:form styleClass="form-base">
-                    <h:inputHidden value="#{editAuctionController.editRequest.id}" />
+                    <h:messages showDetail="false"/>
+                    <h:inputHidden value="#{editAuctionController.editRequest.id}"/>
+
 
                     <div class="form-group">
+                        <h:message for="auction-name"/>
                         <h:inputText id="auction-name" styleClass="form-control" a:placeholder="Auction name"
-                                     value="#{editAuctionController.editRequest.name}"/>
+                                     value="#{editAuctionController.editRequest.name}" required="true">
+                            <c:validateLength minimum="5" maximum="90"/>
+                        </h:inputText>
                     </div>
 
                     <div class="form-group">
+                        <h:message for="description"/>
                         <h:inputText id="description" styleClass="form-control" a:placeholder="Description"
                                      value="#{editAuctionController.editRequest.description}"/>
                     </div>
 
 
                     <div class="form-group">
+                        <h:message for="photo"/>
                         <h:inputText id="photo" styleClass="form-control" a:placeholder="Photo"
                                      value="#{editAuctionController.editRequest.photo}"/>
                     </div>
 
                     <div class="form-group">
+                        <h:message for="price"/>
                         <h:inputText id="price" styleClass="form-control" a:placeholder="Price"
-                                     value="#{editAuctionController.editRequest.price}"/>
-                    </div>
+                                     value="#{editAuctionController.editRequest.price}" required="true">
+                            <c:validateLength minimum="1" maximum="120"/>
+                        </h:inputText>
+                    </div><!--
                     <div class="form-group">
                         <h:inputText id="parameter" styleClass="form-control" a:placeholder="Parameter"
                                      value="#{editAuctionController.editRequest.parameters}"/>
@@ -45,10 +56,10 @@
                     <div class="form-group">
                         <h:inputText id="category" styleClass="form-control" a:placeholder="Category"
                                      value="#{editAuctionController.editRequest.category}"/>
-                    </div>
+                    </div>-->
 
-
-                    <h:commandButton styleClass="btn btn-primary" value="Save" action="#{editAuctionController.save}"/><br/>
+                    <h:commandButton styleClass="btn btn-primary" value="Save"
+                                     action="#{editAuctionController.save}"/><br/>
                 </h:form>
             </div>
         </ui:define>

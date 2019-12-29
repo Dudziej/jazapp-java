@@ -27,7 +27,17 @@ public class LoginFilter extends HttpFilter {
                     res.sendRedirect(getServletContext().getContextPath() + "/index.xhtml");
                 }
             } else {
-                chain.doFilter(req, res);
+                if (isOwnerReq(req)) {
+                    var resq = req.getPart("id");
+                    Long auctionId = Long.parseLong("3");
+                    if (uc.hasAccessToAuction(auctionId)) {
+                        chain.doFilter(req, res);
+                    } else {
+                        res.sendRedirect(getServletContext().getContextPath() + "/index.xhtml");
+                    }
+                } else {
+                    chain.doFilter(req, res);
+                }
             }
         } else {
             res.sendRedirect(getServletContext().getContextPath() + "/login.xhtml");
@@ -51,10 +61,10 @@ public class LoginFilter extends HttpFilter {
     }
 
     private boolean isAdminReq(HttpServletRequest req) {
-        return req.getRequestURI().equals(req.getContextPath() + "/auctions/editauction.xhtml");
+        return isOwnerReq(req);
     }
 
-    private boolean isOwnerReq(HttpServletRequest req){
-        return  req.getRequestURI().equals(req.getContextPath() + "/auctions/editauction.xhtml");
+    private boolean isOwnerReq(HttpServletRequest req) {
+        return req.getRequestURI().equals(req.getContextPath() + "/auctions/editauction.xhtml");
     }
 }
