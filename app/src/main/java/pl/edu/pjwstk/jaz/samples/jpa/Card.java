@@ -21,7 +21,7 @@ public class Card {
     @Column(name = "card_type")
     private CardType cardType;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     @JoinColumn(name = "card_holder_id")
     private CardHolder cardHolder;
 

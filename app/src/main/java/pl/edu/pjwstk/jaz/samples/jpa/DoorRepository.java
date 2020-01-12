@@ -18,12 +18,13 @@ public class DoorRepository {
     }
 
     @Transactional
-    public void save(Door door) {
+    public Door save(Door door) {
         if (door.getId() == null) {
             em.persist(door);
         } else {
-            em.merge(door);
+            door = em.merge(door);
         }
+        return door;
     }
 
     public List<Door> findAll() {
