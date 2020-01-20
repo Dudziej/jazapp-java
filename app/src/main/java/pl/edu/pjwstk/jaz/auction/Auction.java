@@ -1,6 +1,5 @@
 package pl.edu.pjwstk.jaz.auction;
 
-import pl.edu.pjwstk.jaz.auth.ProfileEntity;
 import pl.edu.pjwstk.jaz.auth.User;
 
 import javax.persistence.*;
@@ -27,10 +26,6 @@ public class Auction {
             inverseJoinColumns = @JoinColumn(name = "parameter_id"))
     private Set<ParamEntity> parameters;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "auction_category",
-            joinColumns = @JoinColumn(name = "auction_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private CategoryEntity category;
     @Column(name = "price")
     @DecimalMin(inclusive = true, value = "1")
