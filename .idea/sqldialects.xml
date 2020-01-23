@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/resources/db.changelog/20191021_init.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/app/src/main/resources/db.changelog/20191110_auction.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/app/src/main/resources/db.changelog/20191124_jpa.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/app/src/main/resources/db.changelog/20200123_1_init.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/app/src/main/resources/db.changelog/20200123_init.sql" dialect="GenericSQL" />
   </component>
 </project>

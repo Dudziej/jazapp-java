@@ -20,3 +20,20 @@ databaseChangeLog:
         relativeToChangelogFile: true
         splitStatements: false
         path: 20191110_auction.sql
+
+  - changeSet:
+      id: 20200123_init
+      author: Maciej Dudzik
+      sqlFile:
+        relativeToChangelogFile: true
+        splitStatements: false
+        path: 20200123_init.sql
+
+
+  - changeSet:
+      id: 20200123_1_init
+      author: Maciej Dudzik
+      sqlFile:
+        relativeToChangelogFile: true
+        splitStatements: false
+        path: 20200123_1_init.sql
