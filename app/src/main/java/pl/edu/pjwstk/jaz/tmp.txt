@@ -1,0 +1,4 @@
+web.xml
+facesconfig.xml
+messages.properties
+db.changelog.yaml

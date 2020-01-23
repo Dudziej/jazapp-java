@@ -15,7 +15,33 @@
             <div class="w-25">
                 <h:link styleClass="btn-primary" value="Back" outcome="index"/>
                 <div class="jumbotron">
+                    <div class="list-group">
+                        <ui:repeat value="#{adminPanelController.auctionList}" var="auction">
+                            <h:link styleClass="list-group-item list-group-item-action" outcome="editauction">
+                                <f:param name="auctionId" value="#{auction.id}"/>
+                                <h:graphicImage value="#{auction.photo}" height="64"/>
+                                <h:outputText  value="##{auction.id} #{auction.name} - #{auction.price}"/>
+                            </h:link>
+                        </ui:repeat>
+                    </div>
+                    <div class="text-center">
+                        <h:outputLabel rendered="#{flash.containsKey('error-message')}"
+                                       styleClass="alert alert-danger" value="#{flash['error-message']}"/>
+                        <h:form styleClass="form-base">
+                            <h:messages showDetail="false"/>
+                            <h:inputHidden value="#{editAuctionController.editRequest.id}"/>
 
+                            <div class="form-group">
+                                <h:message for="auction-name"/>
+                                <h:inputText id="auction-name" styleClass="form-control" a:placeholder="Auction name"
+                                             value="#{editAuctionController.editRequest.name}" required="true">
+                                    <c:validateLength minimum="4" maximum="40"/>
+                                </h:inputText>
+                            </div>
+                            <h:commandButton styleClass="btn btn-primary" value="Add"
+                                             action="#{editAuctionController.save}"/><br/>
+                        </h:form>
+                    </div>
                 </div>
             </div>
         </ui:define>
