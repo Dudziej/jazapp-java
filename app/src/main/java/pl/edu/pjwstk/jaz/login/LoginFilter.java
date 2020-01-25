@@ -29,13 +29,17 @@ public class LoginFilter extends HttpFilter {
                 }
             } else {
                 if (isOwnerReq(req)) {
-                    var resq = req.getPart("id");
-                    Long auctionId = Long.parseLong("3");
+					var resq = req.getParameter("id");
+					if (resq == null || resq.length() == 0) {
+						chain.doFilter(req, res);
+					} else {
+					Long auctionId = Long.parseLong(resq);
                     if (uc.hasAccessToAuction(auctionId)) {
                         chain.doFilter(req, res);
                     } else {
                         res.sendRedirect(getServletContext().getContextPath() + "/index.xhtml");
-                    }
+					}
+				}
                 } else {
                     chain.doFilter(req, res);
                 }

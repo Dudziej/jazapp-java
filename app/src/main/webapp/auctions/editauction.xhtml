@@ -16,7 +16,7 @@
             <div class="text-center">
                 <h:outputLabel rendered="#{flash.containsKey('error-message')}"
                                styleClass="alert alert-danger" value="#{flash['error-message']}"/>
-                <h:form styleClass="form-base">
+                <h:form styleClass="form-base" enctype="application/x-www-form-urlencoded">
                     <h:messages showDetail="false"/>
                     <h:inputHidden value="#{editAuctionController.editRequest.id}"/>
 
