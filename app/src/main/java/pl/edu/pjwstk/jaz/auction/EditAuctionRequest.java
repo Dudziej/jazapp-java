@@ -3,28 +3,40 @@ package pl.edu.pjwstk.jaz.auction;
 import javax.swing.text.html.parser.Entity;
 import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class EditAuctionRequest {
     private Long id;
     private String name;
     private String description;
-    private String photo;
+    private List<Photo> photos;
     private Set<ParamEntity> parameters;
     private BigDecimal price;
     private CategoryEntity category;
 
     public EditAuctionRequest() {
+        photos = new ArrayList<>();
+        photos.add(new Photo());
+        photos.add(new Photo());
+        photos.add(new Photo());
+        photos.add(new Photo());
     }
 
     public EditAuctionRequest(Auction auction) {
         this.id = auction.getId();
         this.name = auction.getName();
         this.description = auction.getDescription();
-        this.photo = auction.getPhoto();
+        this.photos = auction.getPhotos();
         this.parameters = auction.getParameters();
         this.price = auction.getPrice();
         this.category = auction.getCategory();
+    }
+
+
+    public Auction toAuction() {
+        return new Auction(id, name, description, photos, parameters, price);
     }
 
     public Long getId() {
@@ -51,12 +63,12 @@ public class EditAuctionRequest {
         this.description = description;
     }
 
-    public String getPhoto() {
-        return photo;
+    public List<Photo> getPhotos() {
+        return photos;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
     }
 
     public Set<ParamEntity> getParameters() {
@@ -82,7 +94,5 @@ public class EditAuctionRequest {
     public void setCategory(CategoryEntity category) {
         this.category = category;
     }
-    public Auction toAuction() {
-        return new Auction(id, name, description, photo, parameters, price);
-    }
+
 }

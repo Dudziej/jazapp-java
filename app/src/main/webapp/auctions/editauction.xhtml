@@ -25,7 +25,7 @@
                         <h:message for="auction-name"/>
                         <h:inputText id="auction-name" styleClass="form-control" a:placeholder="Auction name"
                                      value="#{editAuctionController.editRequest.name}" required="true">
-                            <c:validateLength minimum="5" maximum="90"/>
+                            <c:validateLength maximum="90"/>
                         </h:inputText>
                     </div>
 
@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <h:message for="photo"/>
                         <h:inputText id="photo" styleClass="form-control" a:placeholder="Photo"
-                                     value="#{editAuctionController.editRequest.photo}"/>
+                                     value="#{editAuctionController.editRequest.photos.get(0).path}"/>
                     </div>
 
                     <div class="form-group">
