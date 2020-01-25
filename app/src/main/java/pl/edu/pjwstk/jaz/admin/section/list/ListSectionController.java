@@ -1,23 +1,21 @@
 package pl.edu.pjwstk.jaz.admin.section.list;
 
-import jdk.jfr.Name;
-import pl.edu.pjwstk.jaz.admin.section.SectionEntity;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.List;
+
+import pl.edu.pjwstk.jaz.admin.section.Section;
+import pl.edu.pjwstk.jaz.admin.section.SectionRepository;
 
 @Named
 @RequestScoped
 public class ListSectionController {
+	@Inject
+	private SectionRepository rep;
 
-    public List<SectionEntity> getSections() {
-        var sections = new ArrayList<SectionEntity>();
-        sections.add(new SectionEntity(1L, "Section1"));
-        sections.add(new SectionEntity(2L, "Section2"));
-        sections.add(new SectionEntity(3L, "Section3"));
-        sections.add(new SectionEntity(4L, "Section4"));
-        return sections;
-    }
+	public List<Section> getSections() {
+		return rep.getSections();
+	}
 }

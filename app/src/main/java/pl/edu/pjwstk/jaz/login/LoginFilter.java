@@ -1,6 +1,6 @@
 package pl.edu.pjwstk.jaz.login;
 
-import pl.edu.pjwstk.jaz.auth.UserContext;
+import java.io.IOException;
 
 import javax.faces.application.ResourceHandler;
 import javax.inject.Inject;
@@ -10,7 +10,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import pl.edu.pjwstk.jaz.auth.UserContext;
 
 @WebFilter("*")
 public class LoginFilter extends HttpFilter {
@@ -54,8 +55,7 @@ public class LoginFilter extends HttpFilter {
                 req.getRequestURI().equals(req.getContextPath() + "/register.xhtml") ||
                 req.getRequestURI().contains("samples") ||
                 // ONLY FOR TESTING
-                req.getRequestURI().contains("api") ||
-                req.getRequestURI().contains("admin");
+				req.getRequestURI().contains("api");
                 // ONLY FOR TESTING
     }
 
@@ -65,7 +65,10 @@ public class LoginFilter extends HttpFilter {
     }
 
     private boolean isAdminReq(HttpServletRequest req) {
-        return isOwnerReq(req);
+		if (!isOwnerReq(req)) {
+			return req.getRequestURI().contains("admin");
+		}
+		return false;
     }
 
     private boolean isOwnerReq(HttpServletRequest req) {

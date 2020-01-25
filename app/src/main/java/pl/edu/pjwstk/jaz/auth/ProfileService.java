@@ -1,20 +1,26 @@
 package pl.edu.pjwstk.jaz.auth;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+
+import pl.edu.pjwstk.jaz.admin.section.Section;
+import pl.edu.pjwstk.jaz.admin.section.SectionRepository;
+
 @ApplicationScoped
 public class ProfileService {
     @Inject
     private UserRepository userRepository;
     @Inject
+	private SectionRepository sectionRepository;
+	@Inject
     private HttpServletRequest request;
 
     private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -71,6 +77,12 @@ public class ProfileService {
                     "admin@admin.pl", LocalDate.parse("2007-12-03"));
             userRepository.addUser(user);
         }
+		if (!sectionRepository.getSectionByName("RTV").isPresent()) {
+			var s1 = new Section("RTV");
+			sectionRepository.saveSection(s1);
+			var s2 = new Section("AGD");
+			sectionRepository.saveSection(s2);
+		}
     }
 
     public void logout() {

@@ -19,8 +19,8 @@
                 <h:commandButton styleClass="btn btn-primary" value="Logout" action="#{logoutController.logout}"/>
             </h:form>
 
-            <h3><h:link outcome="auctions/auctionlist" value="Auction List"/></h3>
-            <h3><h:link outcome="adminpanel" value="AdminPanel" rendered="#{userContext.isAdmin()}" /></h3>
+            <h:link styleClass="btn btn-primary" role="button" outcome="auctions/auctionlist" value="Auction List"/>
+            <h:link styleClass="btn btn-secondary" role="button" outcome="adminpanel" value="AdminPanel" rendered="#{userContext.isAdmin()}" />
 
         </ui:define>
     </ui:composition>

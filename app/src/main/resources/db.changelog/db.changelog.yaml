@@ -1,18 +1,4 @@
 databaseChangeLog:
-#  - changeSet:
-#      id: 20191021_init
-#      author: Paweł Janowiak
-#      sqlFile:
-#        relativeToChangelogFile: true
-#        splitStatements: false
-#        path: 20191021_init.sql
-#  - changeSet:
-#      id: 20191124_jpa
-#      author: Paweł Janowiak
-#      sqlFile:
-#        relativeToChangelogFile: true
-#        splitStatements: false
-#        path: 20191124_jpa.sql
   - changeSet:
       id: 20191110_auction
       author: Maciej Dudzik
@@ -20,7 +6,7 @@ databaseChangeLog:
         relativeToChangelogFile: true
         splitStatements: false
         path: 20191110_auction.sql
-
+        
   - changeSet:
       id: 20200123_init
       author: Maciej Dudzik
@@ -28,7 +14,6 @@ databaseChangeLog:
         relativeToChangelogFile: true
         splitStatements: false
         path: 20200123_init.sql
-
 
   - changeSet:
       id: 20200123_1_init
