@@ -3,50 +3,27 @@
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
->
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
 
-    <ui:composition template="templates/base.xhtml">
-        <ui:param name="title" value="Admin Dashboard"/>
+	<ui:composition template="templates/base.xhtml">
+		<ui:param name="title" value="Admin Dashboard" />
 
-        <ui:define name="content">
-            <div class="w-25">
-                <h:link styleClass="btn-primary" value="Back" outcome="index"/>
-                <div class="jumbotron">
-                    <div class="list-group">
-                        <ui:repeat value="#{adminPanelController.auctionList}" var="auction">
-                            <h:link styleClass="list-group-item list-group-item-action" outcome="editauction">
-                                <f:param name="auctionId" value="#{auction.id}"/>
-                                <h:graphicImage value="#{auction.photo}" height="64"/>
-                                <h:outputText  value="##{auction.id} #{auction.name} - #{auction.price}"/>
-                            </h:link>
-                        </ui:repeat>
-                    </div>
-                    <div class="text-center">
-                        <h:outputLabel rendered="#{flash.containsKey('error-message')}"
-                                       styleClass="alert alert-danger" value="#{flash['error-message']}"/>
-                        <h:form styleClass="form-base">
-                            <h:messages showDetail="false"/>
-                            <h:inputHidden value="#{editAuctionController.editRequest.id}"/>
+		<ui:define name="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-6">
+						<h:link styleClass="btn btn-primary" role="button" value="Back" outcome="index" />
+						<h:link styleClass="btn btn-secondary" role="button" value="SectionList" outcome="admin/sectionlist" />
+					</div>
+				</div>
 
-                            <div class="form-group">
-                                <h:message for="auction-name"/>
-                                <h:inputText id="auction-name" styleClass="form-control" a:placeholder="Auction name"
-                                             value="#{editAuctionController.editRequest.name}" required="true">
-                                    <c:validateLength minimum="4" maximum="40"/>
-                                </h:inputText>
-                            </div>
-                            <h:commandButton styleClass="btn btn-primary" value="Add"
-                                             action="#{editAuctionController.save}"/><br/>
-                        </h:form>
-                    </div>
-                </div>
-            </div>
-        </ui:define>
+			</div>
+		</ui:define>
 
-    </ui:composition>
+	</ui:composition>
 
 </h:body>
 </html>
