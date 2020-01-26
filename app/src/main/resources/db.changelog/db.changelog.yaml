@@ -22,3 +22,11 @@ databaseChangeLog:
         relativeToChangelogFile: true
         splitStatements: false
         path: 20200123_1_init.sql
+
+  - changeSet:
+      id: 20200126_init
+      author: Maciej Dudzik
+      sqlFile:
+        relativeToChangelogFile: true
+        splitStatements: false
+        path: 20200126_init.sql
