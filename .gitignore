@@ -207,3 +207,5 @@ gradle-app.setting
 .idea
 helpers
 .idea/webContexts.xml
+
+*.iml
