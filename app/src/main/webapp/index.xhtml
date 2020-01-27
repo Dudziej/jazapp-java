@@ -2,28 +2,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsf/core"
->
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsf/core">
 <h:body>
 
-    <ui:composition template="templates/base.xhtml">
-        <ui:param name="title" value="Main"/>
+	<ui:composition template="templates/base.xhtml">
+		<ui:param name="title" value="Main" />
 
-        <ui:define name="content">
-            <h2>Witaj '<h:outputText value="#{userContext.fullName}"/>' w <h:outputText value="#{msg['jaz.app.name']}"/>!
-            </h2>
+		<ui:define name="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-8">
+						<h2>
+							Witaj '<h:outputText value="#{userContext.fullName}" />' w
+							<h:outputText value="#{msg['jaz.app.name']}" />!
+						</h2>
 
-            <h:form>
-                <h:commandButton styleClass="btn btn-primary" value="Logout" action="#{logoutController.logout}"/>
-            </h:form>
+						<h:form>
+							<h:commandButton styleClass="btn btn-primary" value="Logout"
+								action="#{logoutController.logout}" />
+						</h:form>
 
-            <h:link styleClass="btn btn-primary" role="button" outcome="auctions/auctionlist" value="Auction List"/>
-            <h:link styleClass="btn btn-secondary" role="button" outcome="adminpanel" value="AdminPanel" rendered="#{userContext.isAdmin()}" />
-
-        </ui:define>
-    </ui:composition>
+						<h:link styleClass="btn btn-primary" role="button"
+							outcome="auctions/auctionlist" value="Auction List" />
+						<h:link styleClass="btn btn-secondary" role="button"
+							outcome="adminpanel" value="AdminPanel"
+							rendered="#{userContext.isAdmin()}" />
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
 
 </h:body>
 </html>

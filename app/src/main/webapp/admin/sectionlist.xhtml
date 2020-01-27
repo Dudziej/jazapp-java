@@ -12,19 +12,21 @@
 
 		<ui:define name="content">
 			<div class="container">
-				<div class="row" />
-				<div class="col-8">
-					<h:link styleClass="btn btn-secondary" role="button"
-						outcome="../adminpanel" value="AdminPanel" />
-					<div class="list-group">
-						<ui:repeat value="#{listSectionController.sections}" var="section">
-							<h:link styleClass="list-group-item list-group-item-action"
-								outcome="editsection">
-								<f:param name="sectionId" value="#{section.id}" />
+				<div class="row">
+					<div class="col-8">
+						<h:link styleClass="btn btn-primary" role="button"
+							outcome="/adminpanel" value="AdminPanel" />
+						<div class="list-group">
+							<ui:repeat value="#{listSectionController.sections}"
+								var="section">
+								<h:link styleClass="list-group-item list-group-item-action"
+									outcome="editsection">
+									<f:param name="sectionId" value="#{section.id}" />
 
-								<h:outputText value="##{section.id} #{section.name}" />
-							</h:link>
-						</ui:repeat>
+									<h:outputText value="##{section.id} #{section.name}" />
+								</h:link>
+							</ui:repeat>
+						</div>
 					</div>
 				</div>
 			</div>
