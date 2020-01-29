@@ -24,8 +24,8 @@ CREATE TABLE auction
 
 CREATE TABLE auction_param
 (
-    auction_id      serial  NOT NULL,
-    parameter_id    serial  NOT NULL,
+    auction_id      serial  NOT NULL references auction(id),
+    parameter_id    serial  NOT NULL references parameter(id),
     PRIMARY KEY(auction_id, parameter_id)
 );
 
