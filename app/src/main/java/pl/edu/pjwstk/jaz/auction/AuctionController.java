@@ -55,7 +55,6 @@ public class AuctionController {
 
 	public String save() {
 		var auction = editAuctionRequest.toAuction();
-		System.out.println(editAuctionRequest.getPhotos().size());
 		if (auction.getCreator() == null) {
 			auction.setCreator(uc.getUser().get());
 		}

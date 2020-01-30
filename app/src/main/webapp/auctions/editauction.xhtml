@@ -52,6 +52,10 @@
 						<h:dataTable id="photos" styleClass="table"
 							value="#{auctionController.editRequest.photos}" var="photo">
 							<h:column>
+								<f:facet name="header">Id</f:facet>
+								<h:inputHidden value="#{photo.id}" />
+							</h:column>
+							<h:column>
 								<f:facet name="header">Path</f:facet>
 								<h:inputText value="#{photo.path}" />
 							</h:column>
@@ -61,10 +65,11 @@
 									action="#{auctionController.removePhoto(photo)}"/>
 							</h:column>
 						</h:dataTable>
+						
 					</div>
 					<br></br>
 					<div class="form-group">
-						<h:commandButton value="Add a photo"
+						<h:commandButton value="Add next photo"
 							action="#{auctionController.editRequest.addPhoto}"
 							styleClass="btn btn-secondary" />
 					</div>
