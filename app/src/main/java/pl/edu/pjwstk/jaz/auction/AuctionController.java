@@ -14,15 +14,15 @@ import pl.edu.pjwstk.jaz.samples.ParamRetriever;
 @Named
 @RequestScoped
 public class AuctionController {
-    @Inject
-    private AuctionRepository auctionRepository;
-    @Inject
+	@Inject
+	private AuctionRepository auctionRepository;
+	@Inject
 	private CategoryRepository categoryRepository;
 	@Inject
-    private ParamRetriever paramRetriever;
-    @Inject
-    private UserContext uc;
-    private EditAuctionRequest editAuctionRequest;
+	private ParamRetriever paramRetriever;
+	@Inject
+	private UserContext uc;
+	private EditAuctionRequest editAuctionRequest;
 
 	public List<Category> getCategories() {
 		return categoryRepository.getCategories();
@@ -32,31 +32,33 @@ public class AuctionController {
 		return auctionRepository.getAuctions();
 	}
 
-    public EditAuctionRequest getEditRequest() {
-        if (editAuctionRequest == null) {
-            editAuctionRequest = createEditAuctionRequest();
-        }
-        return editAuctionRequest;
-    }
+	public EditAuctionRequest getEditRequest() {
+		if (editAuctionRequest == null) {
+			editAuctionRequest = createEditAuctionRequest();
+		}
+		return editAuctionRequest;
+	}
 
-    private EditAuctionRequest createEditAuctionRequest() {
-        if (paramRetriever.contains("auctionId")) {
-            var auctionId = paramRetriever.getLong("auctionId");
-            var auction = auctionRepository.getAuctionById(auctionId).orElseThrow();
-            return new EditAuctionRequest(auction);
-        }
-        return new EditAuctionRequest();
-    }
+	private EditAuctionRequest createEditAuctionRequest() {
+		if (paramRetriever.contains("auctionId")) {
+			var auctionId = paramRetriever.getLong("auctionId");
+			var auction = auctionRepository.getAuctionById(auctionId).orElseThrow();
+			return new EditAuctionRequest(auction);
+		}
+		return new EditAuctionRequest();
+	}
 
-    public String save() {
-        var auction = editAuctionRequest.toAuction();
-        if (auction.getCreator() == null) {
-            auction.setCreator(uc.getUser().get());
-        }
+	public String save() {
+		var auction = editAuctionRequest.toAuction();
+		System.out.println(editAuctionRequest.getPhotos().size());
+		if (auction.getCreator() == null) {
+			auction.setCreator(uc.getUser().get());
+		}
 		Category category = categoryRepository.getCategoryById(editAuctionRequest.getCategoryId()).get();
 		auction.setCategory(category);
-        auctionRepository.saveAuction(auction);
+		auction.getPhotos().forEach(p -> p.setAuction(auction));
+		auctionRepository.saveAuction(auction);
 
-        return "/auctions/auctionlist.xhtml?faces-redirect=true";
-    }
+		return "/auctions/auctionlist.xhtml?faces-redirect=true";
+	}
 }

@@ -2,10 +2,13 @@ package pl.edu.pjwstk.jaz.auction;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.DecimalMin;
+
+import pl.edu.pjwstk.jaz.auth.User;
 
 public class EditAuctionRequest {
 	private Long id;
@@ -15,13 +18,11 @@ public class EditAuctionRequest {
 	private Set<ParamEntity> parameters;
 	private BigDecimal price;
 	private Long categoryId;
+	private User creator;
 
 	public EditAuctionRequest() {
 		photos = new ArrayList<>();
-		photos.add(new Photo());
-		photos.add(new Photo());
-		photos.add(new Photo());
-		photos.add(new Photo());
+		addPhoto();
 	}
 
 	public EditAuctionRequest(Auction auction) {
@@ -32,6 +33,22 @@ public class EditAuctionRequest {
 		this.parameters = auction.getParameters();
 		this.price = auction.getPrice();
 		this.categoryId = auction.getCategory().getId();
+		this.photos = auction.getPhotos();
+		this.creator = auction.getCreator();
+	}
+
+	public void addPhoto() {
+		photos.add(new Photo());
+	}
+
+	public void removePhoto(Photo photo) {
+		for (Iterator<Photo> i = photos.iterator(); i.hasNext();) {
+			var p = i.next();
+			if (p.getId() == photo.getId()) {
+				i.remove();
+				break;
+			}
+		}
 	}
 
 	public Auction toAuction() {
@@ -93,6 +110,14 @@ public class EditAuctionRequest {
 
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
 	}
 
 }

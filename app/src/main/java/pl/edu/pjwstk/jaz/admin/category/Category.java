@@ -35,6 +35,11 @@ public class Category {
 	public Category() {
 	}
 
+	public Category(String name, Section section) {
+		this(name);
+		this.section = section;
+	}
+
 	public Long getId() {
 		return id;
 	}

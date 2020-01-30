@@ -11,6 +11,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import pl.edu.pjwstk.jaz.admin.category.Category;
+import pl.edu.pjwstk.jaz.admin.category.CategoryRepository;
 import pl.edu.pjwstk.jaz.admin.section.Section;
 import pl.edu.pjwstk.jaz.admin.section.SectionRepository;
 
@@ -20,6 +22,8 @@ public class ProfileService {
     private UserRepository userRepository;
     @Inject
 	private SectionRepository sectionRepository;
+	@Inject
+	private CategoryRepository categoryRepository;
 	@Inject
     private HttpServletRequest request;
 
@@ -82,6 +86,12 @@ public class ProfileService {
 			sectionRepository.saveSection(s1);
 			var s2 = new Section("AGD");
 			sectionRepository.saveSection(s2);
+		}
+		if (!categoryRepository.getCategoryByName("Monitors").isPresent()) {
+			var c1 = new Category("Monitors", sectionRepository.getSectionByName("RTV").get());
+			categoryRepository.saveCategory(c1);
+			var c2 = new Category("Keys", sectionRepository.getSectionByName("RTV").get());
+			categoryRepository.saveCategory(c2);
 		}
     }
 

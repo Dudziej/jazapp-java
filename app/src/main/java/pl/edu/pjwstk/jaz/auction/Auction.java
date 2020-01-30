@@ -53,7 +53,7 @@ public class Auction {
 
     @OneToMany(
 			mappedBy = "auction", fetch = FetchType.EAGER,
-            cascade= {CascadeType.MERGE, CascadeType.REMOVE},
+			cascade = { CascadeType.MERGE, CascadeType.REMOVE },
             orphanRemoval = true)
     private List<Photo> photos;
 
