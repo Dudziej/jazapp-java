@@ -48,6 +48,11 @@ public class AuctionController {
 		return new EditAuctionRequest();
 	}
 
+	public String remove(Auction a) {
+		auctionRepository.deleteAuction(a);
+		return "/auctions/auctionlist.xhtml?faces-redirect=true";
+	}
+
 	public String save() {
 		var auction = editAuctionRequest.toAuction();
 		System.out.println(editAuctionRequest.getPhotos().size());

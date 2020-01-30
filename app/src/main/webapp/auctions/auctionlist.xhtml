@@ -18,15 +18,25 @@
 						<h:link styleClass="btn btn-primary" value="Add"
 							outcome="editauction" />
 						<div class="list-group">
-							<ui:repeat value="#{auctionController.auctions}"
-								var="auction">
-								<h:link styleClass="list-group-item list-group-item-action"
-									outcome="editauction">
-									<f:param name="auctionId" value="#{auction.id}" />
-									<h:graphicImage value="#{auction.photos[0].path}" height="64" />
-									<h:outputText
-										value="##{auction.id} #{auction.name} - #{auction.price}" />
-								</h:link>
+							<ui:repeat value="#{auctionController.auctions}" var="auction"
+								styleClass="container">
+								<div class="row">
+									<div class="col=10">
+										<h:link styleClass="list-group-item list-group-item-action"
+											outcome="editauction">
+											<f:param name="auctionId" value="#{auction.id}" />
+											<h:graphicImage value="#{auction.photos[0].path}" height="64" />
+											<h:outputText
+												value="##{auction.id} #{auction.name} - #{auction.price}" />
+										</h:link>
+									</div>
+									<div class="col-2">
+										<h:form>
+											<h:commandLink value="X" styleClass="btn btn-danger"
+												action="#{auctionController.remove(auction)}" />
+										</h:form>
+									</div>
+								</div>
 							</ui:repeat>
 						</div>
 					</div>
