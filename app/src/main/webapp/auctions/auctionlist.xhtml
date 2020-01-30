@@ -17,6 +17,10 @@
 						<h:messages showDetail="false" />
 						<h:link styleClass="btn btn-primary" value="Add"
 							outcome="editauction" />
+
+						<h:link styleClass="btn btn-primary" role="button"
+									outcome="/index" value="Home" />
+
 						<div class="list-group">
 							<ui:repeat value="#{auctionController.auctions}" var="auction"
 								styleClass="container">
@@ -29,7 +33,11 @@
 											<h:outputText
 												value="##{auction.id} #{auction.name} - #{auction.price}" />
 										</h:link>
+
+
+
 									</div>
+
 									<div class="col-2">
 										<h:form>
 											<h:commandLink value="X" styleClass="btn btn-danger"
