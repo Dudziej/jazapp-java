@@ -1,12 +1,26 @@
 package pl.edu.pjwstk.jaz.auction;
 
-import pl.edu.pjwstk.jaz.auth.User;
-
-import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+
+import pl.edu.pjwstk.jaz.admin.category.Category;
+import pl.edu.pjwstk.jaz.auth.User;
 
 @Entity
 @Table(name ="auction")
@@ -32,13 +46,13 @@ public class Auction {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
-    private CategoryEntity category;
+	private Category category;
 
     @Column(name = "edited")
     private boolean edited;
 
     @OneToMany(
-            mappedBy = "auction",
+			mappedBy = "auction", fetch = FetchType.EAGER,
             cascade= {CascadeType.MERGE, CascadeType.REMOVE},
             orphanRemoval = true)
     private List<Photo> photos;
@@ -54,7 +68,7 @@ public class Auction {
     }
 
     public Auction(Long id, String name, @DecimalMin(inclusive = true, value = "1") BigDecimal price, String description,
-                   User creator, CategoryEntity category, boolean edited, List<Photo> photos, Set<ParamEntity> parameters) {
+			User creator, Category category, boolean edited, List<Photo> photos, Set<ParamEntity> parameters) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -115,11 +129,11 @@ public class Auction {
         this.creator = creator;
     }
 
-    public CategoryEntity getCategory() {
+	public Category getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryEntity category) {
+	public void setCategory(Category category) {
         this.category = category;
     }
 
