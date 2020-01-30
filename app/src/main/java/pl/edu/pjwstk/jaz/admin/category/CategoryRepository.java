@@ -25,7 +25,7 @@ public class CategoryRepository {
 		return q.getResultStream().findAny();
 	}
 
-	public List<Category> getCategorys() {
+	public List<Category> getCategories() {
 		Query query = em.createQuery("from Category", Category.class);
 		return query.getResultList();
 	}

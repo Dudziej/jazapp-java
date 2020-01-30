@@ -8,7 +8,7 @@
 <h:body>
 
 	<ui:composition template="../templates/base.xhtml">
-		<ui:param name="title" value="Section list" />
+		<ui:param name="title" value="Category list" />
 
 		<ui:define name="content">
 			<div class="container">
@@ -17,15 +17,17 @@
 						<h:link styleClass="btn btn-primary" role="button"
 							outcome="/adminpanel" value="AdminPanel" />
 						<div class="list-group">
-							<ui:repeat value="#{listSectionController.sections}"
-								var="section">
+							<ui:repeat value="#{listCategoryController.categories}"
+								var="category">
 								<h:link styleClass="list-group-item list-group-item-action"
-									outcome="editsection">
-									<f:param name="sectionId" value="#{section.id}" />
+									outcome="editcategory">
+									<f:param name="categoryId" value="#{category.id}" />
 
-									<h:outputText value="##{section.id} #{section.name}" />
+									<h:outputText value="##{category.id} #{category.name} in [#{category.section.name}]" />
 								</h:link>
 							</ui:repeat>
+							<h:link styleClass="btn btn-primary" value="Add"
+							outcome="editcategory" />
 						</div>
 					</div>
 				</div>

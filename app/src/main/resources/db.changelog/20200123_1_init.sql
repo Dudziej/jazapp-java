@@ -11,4 +11,4 @@ create table photo(
 
 alter table auction drop column photo;
 
-alter table category add column section_id int references section(id);
+alter table category add column section_id int not null references section(id);

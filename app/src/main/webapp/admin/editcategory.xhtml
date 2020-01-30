@@ -2,31 +2,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
->
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://java.sun.com/jsf/core">
 <h:body>
 
-    <ui:composition template="../templates/base.xhtml">
-        <ui:param name="title" value="Edit section"/>
+	<ui:composition template="../templates/base.xhtml">
+		<ui:param name="title" value="Edit category" />
 
-        <ui:define name="content">
+		<ui:define name="content">
 
-            <h:form>
-                <h:selectOneMenu value="#{editSectionRequest.exampleSelectedId}">
-                    <f:selectItems value="#{editSectionController.selectExampleOptions}"
-                                   var="it"
-                                   itemLabel="#{it.name}"
-                                   itemValue="#{it.id}" />
-                </h:selectOneMenu>
-                <br/>
-                <br/>
+			<h:form styleClass="form-base"
+				enctype="application/x-www-form-urlencoded">
+				<h:messages showDetail="false" />
+				<h:inputHidden value="#{editCategoryController.editRequest.id}" />
 
-                <h:commandButton styleClass="btn btn-primary" value="Save" action="#{editSectionController.save}"/><br/>
-            </h:form>
-        </ui:define>
+				<div class="form-group">
+					<h:message for="category-name" />
+					<h:inputText id="category-name" styleClass="form-control"
+						a:placeholder="Category name"
+						value="#{editCategoryController.editRequest.name}" required="true">
+						<c:validateLength maximum="90" />
+					</h:inputText>
+				</div>
 
-    </ui:composition>
+				<div class="form-group">
+					<h:selectOneMenu value="#{editCategoryController.editRequest.sectionId}" required="true">
+						<f:selectItems
+							value="#{editCategoryController.sections}" var="it"
+							itemLabel="#{it.name}" itemValue="#{it.id}" />
+					</h:selectOneMenu>
+				</div>
+				<br />
+
+				<h:commandButton styleClass="btn btn-primary" value="Save"
+					action="#{editCategoryController.save}" />
+				<br />
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
 
 </h:body>
 </html>

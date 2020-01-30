@@ -17,28 +17,42 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-    private Long id;
+	private Long id;
 	@Column(name = "name")
-    private String name;
+	private String name;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Section section;
 
 	public Category(String name) {
-        this.name = name;
-    }
+		this.name = name;
+	}
+
+	public Category(Long id, String name) {
+		this(name);
+		this.id = id;
+	}
 
 	public Category() {
 	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
 	public Section getSection() {
 		return section;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSection(Section section) {
+		this.section = section;
+	}
+
 }
