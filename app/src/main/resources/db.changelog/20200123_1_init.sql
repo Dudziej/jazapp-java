@@ -1,7 +1,6 @@
 create table section (
     id   serial primary key,
-    name varchar not null    
-    section_id int references section(id);
+    name varchar not null UNIQUE
 
 );
 create table photo(
@@ -11,3 +10,5 @@ create table photo(
 );
 
 alter table auction drop column photo;
+
+alter table category add column section_id int references section(id);

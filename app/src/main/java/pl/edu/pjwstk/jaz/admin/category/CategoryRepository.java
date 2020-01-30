@@ -20,15 +20,13 @@ public class CategoryRepository {
 	}
 
 	public Optional<Category> getCategoryByName(String name) {
-		TypedQuery<Category> q = em
-				.createQuery(
-						"SELECT a FROM Category a WHERE a.name = :name", Category.class);
-				q.setParameter("name", name);
-				return q.getResultStream().findAny();
-			}
+		TypedQuery<Category> q = em.createQuery("SELECT a FROM Category a WHERE a.name = :name", Category.class);
+		q.setParameter("name", name);
+		return q.getResultStream().findAny();
+	}
 
-			public List<Category> getCategorys() {
-				Query query = em.createQuery("from Category", Category.class);
+	public List<Category> getCategorys() {
+		Query query = em.createQuery("from Category", Category.class);
 		return query.getResultList();
 	}
 

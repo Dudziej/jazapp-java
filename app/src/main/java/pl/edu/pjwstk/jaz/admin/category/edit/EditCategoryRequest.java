@@ -6,13 +6,14 @@ import javax.inject.Named;
 @RequestScoped
 @Named
 public class EditCategoryRequest {
-    private Long exampleSelectedId;
+    private Long selectedSection;
 
-    public Long getExampleSelectedId() {
-        return exampleSelectedId;
-    }
+	public Long getSelectedSection() {
+		return selectedSection;
+	}
 
-    public void setExampleSelectedId(Long exampleSelectedId) {
-        this.exampleSelectedId = exampleSelectedId;
-    }
+	public void setSelectedSection(Long selectedSection) {
+		this.selectedSection = selectedSection;
+	}
+
 }

@@ -20,13 +20,10 @@ public class SectionRepository {
 	}
 
 	public Optional<Section> getSectionByName(String name) {
-		TypedQuery<Section> q = em
-				.createQuery(
-						"SELECT a FROM Section a WHERE a.name = :name",
-				Section.class);
-				q.setParameter("name", name);
-				return q.getResultStream().findAny();
-			}
+		TypedQuery<Section> q = em.createQuery("SELECT a FROM Section a WHERE a.name = :name", Section.class);
+		q.setParameter("name", name);
+		return q.getResultStream().findAny();
+	}
 
 	public List<Section> getSections() {
 		Query query = em.createQuery("from Section", Section.class);

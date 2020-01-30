@@ -6,7 +6,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,7 +21,6 @@ public class Category {
 	@Column(name = "name")
     private String name;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "section_id")
 	private Section section;
 
 	public Category(String name) {

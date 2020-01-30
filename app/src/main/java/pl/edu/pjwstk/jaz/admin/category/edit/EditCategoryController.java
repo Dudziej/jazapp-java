@@ -22,7 +22,7 @@ public class EditCategoryController {
     }
 
     public void save() {
-        var selectedId = sectionRequest.getExampleSelectedId();
+		var selectedId = sectionRequest.getId();
 
         System.out.println("Selected id is equal to " + selectedId);
     }

@@ -19,27 +19,31 @@ public class Section {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-    private Long id;
-	@Column(name = "name")
-    private String name;
-	@OneToMany(cascade = CascadeType.ALL)
+	private Long id;
+	@Column(name = "name", unique = true)
+	private String name;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
 	private List<Category> categories;
 
-	public Section(String name) {
-        this.name = name;
-    }
-
 	public Section() {
-
 	}
 
-    public Long getId() {
-        return id;
-    }
+	public Section(String name) {
+		this.name = name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Section(Long id, String name) {
+		this(name);
+		this.id = id;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
 
 	public List<Category> getCategories() {
 		return categories;
